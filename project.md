@@ -5,7 +5,7 @@
 - Brand: **Marcel Menne Fotografie**.
 - Each gallery can be configured as English or German; this controls the customer-facing interface.
 - Admins can override the hero, story, and download-section headlines per gallery; blank overrides use language-specific defaults.
-- Each gallery can use one of three customer-page styles: Editorial, Botanical, or Minimal. The admin editor includes a visual preview for each.
+- Each gallery can use one of three clearly distinct customer-page styles: Monochrome (clean black and white), Botanical (flower/natural), or Pastel (soft pastel colors). The admin editor includes a visual preview for each.
 - Admin area uses Google login.
 - Each wedding is represented by one Google Drive folder.
 - Google Drive subfolders become gallery categories automatically; categories are never manually defined per gallery.
