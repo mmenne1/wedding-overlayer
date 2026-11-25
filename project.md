@@ -1,0 +1,74 @@
+# Marcel Menne Fotografie — Wedding Overlayer
+
+## Product requirements
+
+- Brand: **Marcel Menne Fotografie**.
+- Admin area uses Google login.
+- Each wedding is represented by one Google Drive folder.
+- Google Drive subfolders become gallery categories.
+- Images that are not inside a category folder are assigned to **Other**.
+- Each gallery is administered separately.
+- Customers receive a password-protected link for their own gallery.
+- The original Google Drive URL must never be exposed in the customer UI or API response.
+- Customers can browse the curated gallery and download individual images through the service.
+- The service caches downloaded thumbnails and full-size files locally on the server.
+- Initial hosting target: Render using the free Render URL.
+- Source repository: https://github.com/mmenne1/wedding-overlayer
+
+## Current implementation
+
+- `server.js` is an Express API.
+- PostgreSQL stores galleries, password hashes, imported file metadata, and admin sessions.
+- Google OAuth handles admin sign-in.
+- The Google Drive API importer recursively scans the wedding folder.
+- Images are served through authenticated proxy endpoints; Drive links are not returned to customers.
+- Customer access uses a separate password cookie scoped to the gallery.
+- Image downloads use the same proxy and are sent as attachments.
+- `render.yaml` contains the Render web-service configuration.
+
+## Required Render environment variables
+
+```text
+DATABASE_URL=PostgreSQL connection string
+ADMIN_EMAILS=marcel@example.com
+ADMIN_SECRET=random long secret
+GOOGLE_CLIENT_ID=Google OAuth client ID
+GOOGLE_CLIENT_SECRET=Google OAuth client secret
+GOOGLE_REDIRECT_URI=https://YOUR-RENDER-SERVICE.onrender.com/auth/google/callback
+GOOGLE_DRIVE_API_KEY=Google Drive API key
+CACHE_DIR=/var/data/cache (only when a persistent Render disk is attached)
+```
+
+`ADMIN_EMAILS` is a comma-separated allowlist. If it is empty, any Google account that successfully authenticates can access the admin area; for production, set it to Marcel’s Google account email.
+
+## Google Cloud setup
+
+1. Create a Google Cloud project.
+2. Enable the Google Drive API.
+3. Create an API key and restrict it to the Drive API.
+4. Create an OAuth consent screen.
+5. Create a Web application OAuth client.
+6. Add the Render callback URL to the OAuth client’s authorised redirect URIs.
+7. Add Marcel’s Google account as an allowed test user while the OAuth app is in testing mode.
+
+Each Drive folder must be shared so that the configured Drive API can read it. The importer uses the public folder link and the API key to list image files.
+
+## Render deployment
+
+1. Push this folder to the empty GitHub repository.
+2. Create a PostgreSQL database on Render or use a free PostgreSQL provider such as Neon/Supabase.
+3. In Render, choose **New → Blueprint** and connect `mmenne1/wedding-overlayer`.
+4. Set the environment variables above.
+5. Deploy and use the generated `onrender.com` URL.
+
+## Free-tier caching limitation
+
+The application caches images under `/tmp` by default. Render’s free web services use ephemeral storage, so the cache may be lost when the service restarts or redeploys. This does not lose gallery metadata or passwords, but images will be fetched from Drive again. Persistent local caching requires a paid Render persistent disk, or an external object store such as Cloudflare R2, Backblaze B2, or S3-compatible storage.
+
+## Security notes
+
+- The Drive URL is stored server-side only and is not included in public gallery responses.
+- Customer passwords are hashed using Node’s `scrypt`; plaintext passwords are never stored.
+- Customer URLs are unguessable IDs and require the gallery password.
+- The original Drive folder must not be shared with customers if it must remain undiscoverable. Customers can still access it if somebody separately gives them the original URL.
+- For a production launch, add rate limiting, password reset/rotation, CSRF protection for admin mutations, upload/import progress, and automated database backups.
