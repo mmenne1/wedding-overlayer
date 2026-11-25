@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: gather-gallery
+    name: wedding-overlayer
     runtime: node
     region: frankfurt
     plan: free
