@@ -2,6 +2,7 @@ services:
   - type: web
     name: gather-gallery
     runtime: node
+    region: frankfurt
     plan: free
     buildCommand: npm install
     startCommand: npm start
