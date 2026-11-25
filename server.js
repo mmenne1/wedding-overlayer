@@ -18,7 +18,7 @@ function idFor(name) { return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').rep
 function cookie(res, name, value, maxAge) { res.setHeader('Set-Cookie', `${name}=${value}; Path=/; HttpOnly; SameSite=Lax; Secure; Max-Age=${maxAge}`); }
 function cookies(req) { return Object.fromEntries((req.headers.cookie || '').split(';').filter(Boolean).map(x => { const i=x.indexOf('='); return [x.slice(0,i).trim(), decodeURIComponent(x.slice(i+1))]; })); }
 function sign(value) { return `${value}.${crypto.createHmac('sha256', process.env.ADMIN_SECRET || 'change-me').update(value).digest('base64url')}`; }
-function validSigned(value) { const [body, sig] = String(value || '').split('.'); if (!body || !sig) return false; const expected=crypto.createHmac('sha256', process.env.ADMIN_SECRET || 'change-me').update(body).digest('base64url'); return sig===expected; }
+function validSigned(value) { const raw=String(value || ''), separator=raw.lastIndexOf('.'); if (separator < 1) return false; const body=raw.slice(0,separator), sig=raw.slice(separator+1); const expected=crypto.createHmac('sha256', process.env.ADMIN_SECRET || 'change-me').update(body).digest('base64url'); return sig===expected; }
 function hashPassword(password) { const salt=crypto.randomBytes(16).toString('hex'); return new Promise((resolve,reject)=>crypto.scrypt(password,salt,64,(e,key)=>e?reject(e):resolve(`${salt}:${key.toString('hex')}`))); }
 function checkPassword(password, stored) { const [salt,hex]=String(stored||'').split(':'); return new Promise(resolve=>crypto.scrypt(password,salt,64,(e,key)=>resolve(!e && crypto.timingSafeEqual(key,Buffer.from(hex,'hex'))))); }
 function driveId(url) { const m=String(url||'').match(/(?:folders\/|id=|\/d\/)([a-zA-Z0-9_-]+)/); return m?.[1] || null; }
