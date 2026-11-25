@@ -3,6 +3,7 @@
 ## Product requirements
 
 - Brand: **Marcel Menne Fotografie**.
+- Each gallery can be configured as English or German; this controls the customer-facing interface.
 - Admin area uses Google login.
 - Each wedding is represented by one Google Drive folder.
 - Google Drive subfolders become gallery categories automatically; categories are never manually defined per gallery.
