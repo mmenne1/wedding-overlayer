@@ -17,6 +17,7 @@
 - Customers receive a password-protected link for their own gallery.
 - The original Google Drive URL must never be exposed in the customer UI or API response.
 - Customers can browse the curated gallery and download individual images through the service.
+- The image lightbox supports previous/next navigation restricted to the currently selected Drive category, including keyboard left/right arrows.
 - Customers can download all gallery images as a ZIP archive through the service.
 - The service caches downloaded thumbnails and full-size files locally on the server.
 - Initial hosting target: Render using the free Render URL.
