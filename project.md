@@ -5,8 +5,8 @@
 - Brand: **Marcel Menne Fotografie**.
 - Admin area uses Google login.
 - Each wedding is represented by one Google Drive folder.
-- Google Drive subfolders become gallery categories.
-- Images that are not inside a category folder are assigned to **Other**.
+- Google Drive subfolders become gallery categories automatically; categories are never manually defined per gallery.
+- Images directly inside the wedding folder, or otherwise without a category subfolder, are assigned to **Other**.
 - Each gallery is administered separately.
 - Existing galleries can be edited after creation, including customer-facing text, date, location, categories, and password rotation.
 - Customers receive a password-protected link for their own gallery.
@@ -23,6 +23,7 @@
 - PostgreSQL stores galleries, password hashes, imported file metadata, and admin sessions.
 - Google OAuth handles admin sign-in.
 - The Google Drive API importer recursively scans the wedding folder.
+- Import and Sync Drive derive the complete category list from the current subfolder structure and always include `Other`.
 - Images are served through authenticated proxy endpoints; Drive links are not returned to customers.
 - Customer access uses a separate password cookie scoped to the gallery.
 - Image downloads use the same proxy and are sent as attachments.
