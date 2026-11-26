@@ -18,7 +18,7 @@
 - Customers receive a password-protected link for their own gallery.
 - The original Google Drive URL must never be exposed in the customer UI or API response.
 - Customers can browse the curated gallery and download individual images through the service.
-- The image lightbox supports previous/next navigation restricted to the currently selected Drive category, including keyboard left/right arrows.
+- The image lightbox supports continuous previous/next navigation across the entire gallery, including keyboard left/right arrows. At each chapter boundary it shows a styled chapter transition card first; the following keypress opens the first image of the next chapter.
 - Imported photos are ordered alphabetically by filename (A–Z, with natural numeric ordering) within the customer’s chapter flow.
 - Customers can download all gallery images as a ZIP archive through the service.
 - The service caches downloaded thumbnails and full-size files locally on the server.
