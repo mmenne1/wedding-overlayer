@@ -7,6 +7,7 @@
 - Admins can override the hero, story, and download-section headlines per gallery; blank overrides use language-specific defaults.
 - Each gallery can use one of three clearly distinct customer-page styles: Monochrome (clean black and white), Botanical (flower/natural), or Pastel (soft pastel colors). The admin editor includes a visual preview for each.
 - Each gallery can use one of three photo layouts: Gallery flow (masonry), Clean grid (square tiles), or Polaroid story (framed snapshots).
+- Admins can choose the customer landing-page header image from three randomized gallery candidates and reroll for three new options.
 - The admin editor shows a combined style-and-layout preview, and the selected color style is also used on the customer password screen.
 - Admin area uses Google login.
 - Each wedding is represented by one Google Drive folder.
