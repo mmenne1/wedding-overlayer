@@ -14,7 +14,8 @@ const { Pool } = pg; const pool = process.env.DATABASE_URL ? new Pool({ connecti
 const cacheRoot = path.join(process.env.CACHE_DIR || '/tmp', 'gather-gallery-cache');
 const oauth = process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET ? new OAuth2Client(process.env.GOOGLE_CLIENT_ID, process.env.GOOGLE_CLIENT_SECRET, process.env.GOOGLE_REDIRECT_URI) : null;
 const stripe = process.env.STRIPE_SECRET_KEY ? new Stripe(process.env.STRIPE_SECRET_KEY) : null;
-const OWNER_EMAILS = (process.env.ADMIN_EMAILS || '').split(',').map(x => x.trim().toLowerCase()).filter(Boolean);
+const parseEmails = value => String(value || '').split(/[;,\s]+/).map(x => x.trim().toLowerCase()).filter(Boolean);
+const OWNER_EMAILS = [...new Set([...parseEmails(process.env.ADMIN_EMAILS), ...parseEmails(process.env.OWNER_EMAILS), 'marcel.menne@gmx.de'])];
 const PRO_MAX_GALLERIES = 25; const TRIAL_MAX_PHOTOS = 50; const PRO_MAX_PHOTOS = 5000;
 const categoriesDefault = ['Before the wedding', 'The ceremony', 'The party', 'Other'];
 
