@@ -9,6 +9,7 @@ This folder now contains a deployable full-service MVP:
 - Google OAuth admin authentication
 - Google Drive folder import, including recursive subfolders as categories
 - Password-protected customer links with server-side image proxying and downloads
+- Owner/subscriber accounts with a one-gallery/50-photo free trial and Stripe subscription gating
 
 ## Run locally
 
@@ -36,6 +37,7 @@ Open `http://localhost:3000`. The Drive API key must be allowed to use the Drive
    - `GOOGLE_DRIVE_API_KEY`
    - Google OAuth variables
    - `ADMIN_SECRET` (Render generates this from the blueprint)
+   - `STRIPE_SECRET_KEY`, `STRIPE_PRICE_ID`, `STRIPE_WEBHOOK_SECRET`, and `PUBLIC_APP_URL`
 5. Deploy and open the service URL.
 
 ## Notes on access control

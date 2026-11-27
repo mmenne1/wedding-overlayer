@@ -19,5 +19,13 @@ services:
         sync: false
       - key: GOOGLE_DRIVE_API_KEY
         sync: false
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: STRIPE_PRICE_ID
+        sync: false
+      - key: STRIPE_WEBHOOK_SECRET
+        sync: false
+      - key: PUBLIC_APP_URL
+        sync: false
       - key: ADMIN_SECRET
         generateValue: true
