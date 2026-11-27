@@ -10,6 +10,7 @@
 - Admins can choose the customer landing-page header image from three randomized gallery candidates and reroll for three new options.
 - The owner account is free and unlimited. Other Google accounts receive a free trial of one gallery and 50 imported photos; an active Stripe subscription unlocks up to 25 galleries.
 - Stripe subscription checkout and webhooks update subscriber status; the owner dashboard lists subscriber accounts and can suspend them.
+- PayPal Subscriptions can be used as the primary checkout; the PayPal plan's merchant/sandbox account receives the subscription payment. Stripe remains available as a fallback.
 - The admin editor shows a combined style-and-layout preview, and the selected color style is also used on the customer password screen.
 - Admin area uses Google login.
 - Each wedding is represented by one Google Drive folder.

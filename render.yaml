@@ -15,6 +15,16 @@ services:
         sync: false
       - key: BILLING_TEST_SUBSCRIBER_EMAILS
         sync: false
+      - key: PAYPAL_CLIENT_ID
+        sync: false
+      - key: PAYPAL_CLIENT_SECRET
+        sync: false
+      - key: PAYPAL_PLAN_ID
+        sync: false
+      - key: PAYPAL_MODE
+        sync: false
+      - key: PAYPAL_WEBHOOK_ID
+        sync: false
       - key: GOOGLE_CLIENT_ID
         sync: false
       - key: GOOGLE_CLIENT_SECRET

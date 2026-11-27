@@ -37,7 +37,9 @@ Open `http://localhost:3000`. The Drive API key must be allowed to use the Drive
    - `GOOGLE_DRIVE_API_KEY`
    - Google OAuth variables
    - `ADMIN_SECRET` (Render generates this from the blueprint)
-   - `STRIPE_SECRET_KEY`, `STRIPE_PRICE_ID`, `STRIPE_WEBHOOK_SECRET`, and `PUBLIC_APP_URL`
+   - PayPal: `PAYPAL_CLIENT_ID`, `PAYPAL_CLIENT_SECRET`, `PAYPAL_PLAN_ID`, `PAYPAL_MODE`, `PAYPAL_WEBHOOK_ID`
+   - Optional Stripe fallback: `STRIPE_SECRET_KEY`, `STRIPE_PRICE_ID`, `STRIPE_WEBHOOK_SECRET`
+   - `PUBLIC_APP_URL`
 5. Deploy and open the service URL.
 
 ## Notes on access control
